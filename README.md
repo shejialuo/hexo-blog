@@ -29,3 +29,9 @@ npm install hexo-generator-feed --save
 
 For theme, I use [cactus](https://github.com/probberechts/hexo-theme-cactus). It is easy to
 setup if you following the guide.
+
+## SEO
+
+```sh
+npm install hexo-generator-sitemap --save
+```
