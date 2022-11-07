@@ -1,0 +1,12 @@
+[
+    {
+      "name":"OS-Configuration",
+      "url":"https://github.com/shejialuo/OS-Configuration",
+      "desc":"This is my all OS configuration"
+    },
+    {
+       "name":"ugit-cpp",
+       "url":"https://github.com/shejialuo/ugit-cpp",
+       "desc":"A simplified git implemented by cpp"
+    }
+]
