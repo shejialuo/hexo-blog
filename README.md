@@ -30,6 +30,18 @@ npm install hexo-generator-feed --save
 For theme, I use [cactus](https://github.com/probberechts/hexo-theme-cactus). It is easy to
 setup if you following the guide.
 
+### Mermaid Support
+
+```sh
+npm install hexo-filter-mermaid-diagrams --save
+```
+
+### Better figure
+
+```sh
+npm install hexo-light-gallery --save
+```
+
 ## SEO
 
 ```sh
