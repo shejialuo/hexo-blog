@@ -5,6 +5,8 @@ tags:
 categories:
   - 游戏笔记
 date: 2021-03-06 19:54:12
+redirect_from:
+  - /aa73f9e282b5
 ---
 
 ## 感想

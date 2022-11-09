@@ -6,6 +6,8 @@ categories:
   - 工具
 date: 2021-04-22 17:42:41
 excerpt: Zotero安装及使用教程
+redirect_from:
+  - /1a46672b0bad
 ---
 
 ## 1. 安装

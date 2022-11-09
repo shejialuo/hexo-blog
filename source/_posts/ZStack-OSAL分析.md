@@ -5,6 +5,8 @@ tags:
 categories:
   - 技术
 date: 2021-03-06 12:49:00
+redirect_from:
+  - /e50cb4a5b3de
 ---
 
 ## 1. OSAL的思想起源

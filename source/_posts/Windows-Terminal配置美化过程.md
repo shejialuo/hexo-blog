@@ -5,6 +5,8 @@ tags:
 categories:
   - 工具
 date: 2022-11-07 19:16:04
+redirect_from:
+  - /64ee9fde735a
 ---
 
 ## 1. 预先准备
