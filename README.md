@@ -47,3 +47,9 @@ npm install hexo-light-gallery --save
 ```sh
 npm install hexo-generator-sitemap --save
 ```
+
+## Redirect Url
+
+```sh
+npm install hexo-generator-redirect --save
+```
