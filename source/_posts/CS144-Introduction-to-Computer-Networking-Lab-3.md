@@ -30,11 +30,11 @@ At now, we can code.
 
 ```c++
 // file: retransmission_timer.hh
-enum class State { running, stop };
+enum class TimerState { running, stop };
 
 class RetransmissionTimer {
   private:
-    State state;                  //! the state of the timer
+    TimerState state;             //! the state of the timer
     size_t _initial_rto;          //! the initial retransmission timeout
     size_t _rto;                  //! current retransmission timeout
     size_t _accumulate_time = 0;  //! the accumulate time
@@ -61,14 +61,12 @@ class RetransmissionTimer {
 
 ```c++
 // file: retransmission_timer.cc
-#include "retransmission_timer.hh"
-
 RetransmissionTimer::RetransmissionTimer(const size_t retx_timeout)
-    : state{State::stop}, _initial_rto{retx_timeout}, _rto{retx_timeout} {}
+    : state{TimerState::stop}, _initial_rto{retx_timeout}, _rto{retx_timeout} {}
 
 bool RetransmissionTimer::tick_callback(const size_t ms_since_last_tick) {
     //! Only when the timer is running, we add the `_accumulate_time`.
-    if (state == State::running) {
+    if (state == TimerState::running) {
         _accumulate_time += ms_since_last_tick;
         //! Check whether the timer has elapsed.
         return _rto <= _accumulate_time;
@@ -82,15 +80,15 @@ void RetransmissionTimer::reset_timer() {
 }
 
 void RetransmissionTimer::start_timer() {
-    if (state == State::stop) {
-        state = State::running;
+    if (state == TimerState::stop) {
+        state = TimerState::running;
         reset_timer();
     }
 }
 
 void RetransmissionTimer::stop_timer() {
-    if (state == State::running) {
-        state = State::stop;
+    if (state == TimerState::running) {
+        state = TimerState::stop;
     }
 }
 
