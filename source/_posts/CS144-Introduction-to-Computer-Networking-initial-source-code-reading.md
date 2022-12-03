@@ -8,9 +8,13 @@ categories:
 date: 2022-11-21 11:06:32
 ---
 
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
+---
+
 ## File Descriptor
 
-First, the source code uses `FileDescriptor` class to wrap the file descriptor. The `FileDescriptor` class first defines a private `FDWrapper` class, and also defines a private shared ptr to point to the `FDWrapper` class. The code has also provided the private constructor to duplicate the `FileDescriptor`, and a public constructor to accept a `const int` file descriptor for initialization. Because there is no need to copy or move the `FDWrapper`, we disable all these operations. And due to the principle of the RAII, we should close the file in the destructor.
+First, the source code uses `FileDescriptor` class to wrap the file descriptor. The `FileDescriptor` class first defines a private `FDWrapper` class, and also defines a private `shared_ptr` to point to the `FDWrapper` class. The code has also provided the private constructor to duplicate the `FileDescriptor`, and a public constructor to accept a `const int` file descriptor for initialization. Because there is no need to copy or move the `FDWrapper`, we disable all these operations. And due to the principle of the RAII, we should close the file in the destructor.
 
 ```c++
 class FDwrapper {
@@ -48,7 +52,7 @@ public:
 };
 ```
 
-This code uses SystemCall in util.cc, it just wraps to easily deal with the return value and error handle.
+This code uses `SystemCall` in `util.cc`, it just wraps to easily deal with the return value and error handle.
 
 ```c++
 int SystemCall(const char *attempt, const int return_value, const int errno_mask = 0) {
@@ -273,7 +277,7 @@ Here, I omit `as_iovecs` function. Later for it.
 
 ## Reading and Writing File
 
-We have talked about the source code of the buffer, it's time to find how `FileDescriptor` to read and write files. Well, actually, it doesn't use much.
+We have talked about the source code of the buffer, it's time to find how `FileDescriptor` to read and write files. Well, actually, it is not complicated.
 
 ```c++
 class FileDescriptor {

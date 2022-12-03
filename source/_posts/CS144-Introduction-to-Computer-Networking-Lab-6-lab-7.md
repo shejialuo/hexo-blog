@@ -1,12 +1,16 @@
 ---
 title: 'CS144: Introduction to Computer Networking Lab 6 & lab 7'
 tags:
-  - tag_name
+  - 技术
+  - 学习
 categories:
-  - category_name
+  - CS144
 date: 2022-11-30 20:05:36
 ---
 
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
+---
 
 ## Lab 6
 

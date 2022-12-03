@@ -8,6 +8,10 @@ categories:
 date: 2022-11-21 16:58:55
 ---
 
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
+---
+
 First, you should carefully read the docs provided by the lab
 
 > The TCP sender is dividing its byte stream up into short *segments* so that they can fit inside a datagram. But the network might reorder these datagrams, or drop them, or deliver them more than once. The receiver must reassemble the segments into the contiguous stream of bytes that they started out as.

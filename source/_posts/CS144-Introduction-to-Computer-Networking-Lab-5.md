@@ -1,10 +1,15 @@
 ---
 title: 'CS144: Introduction to Computer Networking Lab 5'
 tags:
-  - tag_name
+  - 技术
+  - 学习
 categories:
-  - category_name
+  - CS144
 date: 2022-11-29 22:02:15
+---
+
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
 ---
 
 First you should carefully read the docs provided by lab. I give some important things here.

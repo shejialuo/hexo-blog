@@ -8,6 +8,10 @@ categories:
 date: 2022-11-21 11:43:15
 ---
 
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
+---
+
 ## Writing webget
 
 It is easy to write the `webget`.

@@ -8,6 +8,10 @@ categories:
 date: 2022-11-28 19:24:11
 ---
 
+You can get the whole series from [here](https://luolibrary.com/categories/CS144/)
+
+---
+
 Before we write the code, we should think what would `TCPConnection` do. If you carefully read the docs provided by lab. You will understand the requirements easily. But the most important thing is to understand how `TCPConnection` combines the `TCPReceiver` and `TCPSender` and achieves the functionality.
 
 Here, I give an example to illustrate the process. I named the two instances of `TCPConnection` called `TCPConnectionA` and `TCPConnectionB`. And the `TCPConnectionA` has two classes `TCPReceiverA` and `TCPSenderA`, respectively, the `TCPConnectionB` has two classes `TCPReceiverB` and `TCPSenderB`.
@@ -147,7 +151,7 @@ void TCPConnection::set_error() {
 
 ## connect
 
-Now we comes to the most important part, when the client wants to connect the server, it calls the `connect`. It is simple enough, because I have done the job in the `TCPSender.
+Now we comes to the most important part, when the client wants to connect the server, it calls the `connect`. It is simple enough, because I have done the job in the `TCPSender`.
 
 ```c++
 void TCPConnection::connect() {
