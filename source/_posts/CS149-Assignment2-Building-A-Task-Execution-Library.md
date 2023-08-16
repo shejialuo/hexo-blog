@@ -55,7 +55,7 @@ void TaskSystemSerial::run(IRunnable* runnable, int num_total_tasks) {
 
 ### Step 1
 
-The most simplest answer is just to make the `run` function as the master, and create the threads to do the job. And join the thread at last. (However, I use C++14 for better lambda function).
+The simplest answer is just to make the `run` function as the master, and create the threads to do the job. And join the thread at last. (However, I use C++14 for better lambda function).
 
 ```c++
 void TaskSystemParallelSpawn::run(IRunnable* runnable, int num_total_tasks) {
@@ -77,7 +77,7 @@ void TaskSystemParallelSpawn::run(IRunnable* runnable, int num_total_tasks) {
 
 ### Step 2
 
-Well, it is not so easy to write a thread loop. There are so many details we need to deal with. The most important thing here is do remember `join` the thread whe the class's lifetime ends.
+Well, it is not so easy to write a thread loop. There are so many details we need to deal with. The most important thing here is do remember `join` all the threads when the class's lifetime ends.
 
 It may seem that we need to accept every index to dynamic choose what to do. This is a stupid idea. Remember, we should reduce the size of synchronization. So we use the idea of step 1.
 
@@ -94,7 +94,7 @@ private:
   bool terminate = false; // Whether we should terminate the thread
   int total_tasks = 0;    // we should record the total task
   void start(int num_threads); // start the thread pool
-  void threadLoop(int i); // thread functionaility
+  void threadLoop(int i); // thread functionality
   bool busy(); // whether the threads are busy doing their jobs
 ```
 
@@ -123,7 +123,7 @@ void TaskSystemParallelThreadPoolSpinning::start(int num_threads) {
 }
 ```
 
-Now, we come the most important part. For how to tell whether there is a job for the thread, we use `jobs` as a bit map. And when the job is finished, we make the corresponding to 0.
+Now, we come to the most important part. For how to tell whether there is a job for the thread, we use `jobs` as a bit map. And when the job is finished, we make the corresponding to 0.
 
 ```c++
 void TaskSystemParallelThreadPoolSpinning::threadLoop(int i) {
@@ -235,7 +235,7 @@ private:
   std::vector<Task*> ready {}; // The task is ready to be processed
   std::unordered_set<Task*> blocked {}; // The task is blocked
   std::vector<std::thread> threads;
-  std::unordered_map<TaskID, std::unordered_set<Task*>> depencency {}; // The depencency information
+  std::unordered_map<TaskID, std::unordered_set<Task*>> dependency {}; // The dependency information
   TaskID id = 0;
   std::mutex queue_mutex;
   std::condition_variable consumer;
@@ -274,10 +274,10 @@ TaskID TaskSystemParallelThreadPoolSleeping::runAsyncWithDeps(IRunnable* runnabl
 
     // Record dependency information for later processing
     for (TaskID dep : deps) {
-      if (depencency.count(dep)) {
-        depencency[dep].insert(task);
+      if (dependency.count(dep)) {
+        dependency[dep].insert(task);
       } else {
-        depencency[dep] = std::unordered_set<Task*>{task};
+        dependency[dep] = std::unordered_set<Task*>{task};
       }
     }
     // We should notify the producer to continue processing
@@ -357,7 +357,6 @@ void TaskSystemParallelThreadPoolSleeping::threadLoop(int id_) {
 
 And the other part is some auxiliary functions:
 
-
 ```c++
 void TaskSystemParallelThreadPoolSleeping::deleteFinishedTask(Task* task) {
   size_t i = 0;
@@ -367,8 +366,8 @@ void TaskSystemParallelThreadPoolSleeping::deleteFinishedTask(Task* task) {
   finished.insert({ready[i]->id ,ready[i]});
   ready.erase(ready.begin() + i);
 
-  if(depencency.count(task->id)) {
-    for(auto t: depencency[task->id]) {
+  if(dependency.count(task->id)) {
+    for(auto t: dependency[task->id]) {
       t->dependencies--;
     }
   }

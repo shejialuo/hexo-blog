@@ -11,7 +11,7 @@ date: 2023-06-08 15:36:01
 
 ## Part 1
 
-Before we use OpenMP to parallelize the code. We just first write the serial form. It is easy.
+Before we use openMP to parallelize the code. We just first write the serial form. It is easy.
 
 ```c++
 void pageRank(Graph g, double* solution, double damping, double convergence) {
@@ -63,7 +63,7 @@ void pageRank(Graph g, double* solution, double damping, double convergence) {
 }
 ```
 
-Now we can use OpenMP to parallelize the code above.
+Now we can use openMP to parallelize the code above.
 
 ```c++
 void pageRank(Graph g, double* solution, double damping, double convergence) {
@@ -130,7 +130,7 @@ void pageRank(Graph g, double* solution, double damping, double convergence) {
 
 ### Top Down BFS
 
-The easiest idea for implementing top-down bfs is to use two variable, one is for the current frontier, and another is for the next frontier. And when we add the new node to the next frontier, we should use `#pragma omp critical` to protect the next frontier. However, this method is too slow.
+The easiest idea for implementing top-down bfs is to use two variables, one is for the current frontier, and another is for the next frontier. And when we add the new node to the next frontier, we should use `#pragma omp critical` to protect the next frontier. However, this method is too slow.
 
 However, we could let each thread use its local next frontier. Thus we could avoid critical section and make the code faster.
 
@@ -181,7 +181,7 @@ void top_down_step(
 
 ### Bottom Up BFS
 
-The Top Down BFS is a easy job to do actually. Because it is a prior algorithm. However, in the code, we would do many logical operations especially the frontier size is large and its ancestors' size is small. Look at the following code snippet, which would cause so many logical operations.
+The Top Down BFS is an easy job to do actually. Because it is a prior algorithm. However, in the code, we would do many logical operations especially the frontier size is large and its ancestors' size is small. Look at the following code snippet, which would cause so many logical operations.
 
 ```c++
 if (distances[outgoing] == NOT_VISITED_MARKER &&
@@ -278,13 +278,11 @@ And the article provides some tips:
 + Don't store temporary, thread specific data in an array indexed by th thread id or rank.
 + When parallelizing an algorithm, partition data sets along cache lines, not across cache lines.
 
-The last tip is what we could do. So we could use `schedule(dynamic, chunk_size)` for openmp to
-improve efficiency.
+The last tip is what we could do. So we could use `schedule(dynamic, chunk_size)` for openMP to improve efficiency.
 
 ### Hybrid BFS
 
-The pairing of the top-down approach with the bottom-up approach is complementary, since when the
-frontier is its largest, the bottom-up approach will be at its best whereas the top-down approach will be at its worst, and vice versa.
+The pairing of the top-down approach with the bottom-up approach is complementary, since when the frontier is its largest, the bottom-up approach will be at its best whereas the top-down approach will be at its worst, and vice versa.
 
 So the idea is simple. Uses the Top Down BFS for steps when the frontier is large. We begin each search with the Top Down BFS and continue until the frontier becomes too large, at which point we switch to the Bottom Up BFS.
 
