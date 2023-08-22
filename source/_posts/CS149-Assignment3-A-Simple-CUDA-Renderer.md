@@ -109,13 +109,41 @@ Now, the result is illustrated by below.
 
 As you can see, we have passed some tests and the performance is not good at all. The reason why there are some failed tests is that the bytes exceed $2^{63}$, which would overflow.
 
-So what's the problem?
+### Best practice
 
-### Improvement
+We should use a clever way to solve this problem. The problem is a two-dimensional problem. So we'd better design the grid and block for two dimensions, as the following figures illustrates:
 
-Don't be too greedy! In the above scenario, I have made a mistake, I want to make the whole program to be parallelized. I don't care about any architecture of the GPU.
+![grid and block design for rendering](https://s2.loli.net/2023/08/22/MWiVgyBYRU2CmlD.png)
 
-Because this is only a tutorial, you should try this work on your own. Below are some suggestions:
+From the above figures, we could write the following code to initialize the grid and block size:
 
-1. Instead of storing all the pixels, why not use shared memory for better usage?
-2. Don't be greedy. We could handle some in sequential.
+```c++
+void CudaRenderer::render() {
+  int block_x = 16, block_y = 32;
+  dim3 blockDim(block_x, block_y);
+  int grid_x = (image->width + blockDim.x - 1) / blockDim.x;
+  int grid_y = (image->height + blockDim.y - 1) / blockDim.y;
+  dim3 gridDim(grid_x, grid_y);
+}
+```
+
+And we should render a block each time, we have already split the pixels into the block. For each block, we should handle the each pixel, we could calculate the current pixel's x coordinate and y coordinate and the current thread id:
+
+```c++
+int thread_id = threadIdx.y * blockDim.x + threadId.x;
+int pixel_index_x = blockId.x * blockDim.x + threadId.x;
+int pixel_index_y = blockId.y * blockDim.y + threadId.y;
+```
+
+So what a thread should do? We have already mapped a pixel $(x, y)$ with a specified thread. So the idea should be simple enough.
+
++ **We could traverse sequentially all the circles to tell whether the circle has contributed to this pixel, and we calculate to achieve rendering**.
+
+However, this way is too slow. For every pixel, we could calculate a lot of useless calculation. For example, if there are total 100,000,000 circles, there would be many useless circles for this pixel. So we should find a way to find the circles in the current block. So we could use a shared memory (a bit map) to know whether the *BLOCK* size circle has contributed to the block. So for each pixel (each thread) we could calculate ONLY one circle to know whether it has contributed to this block. And for each pixel, we could use the contributed circles to sequentially achieve rendering.
+
+Look at what parallelism we have done:
+
++ Each pixel renders itself using two-dimension task split.
++ Each pixel handles 1 circle to tell whether it contributes to the current block for $num_{circles} / size_{block}$ loops.
+
+It's a really hard question, but it is very useful.
