@@ -5,8 +5,6 @@ tags:
 categories:
   - 游戏笔记
 date: 2021-02-23 19:27:42
-redirect_from:
-  - /976b94093a15
 ---
 
 ## 摘录

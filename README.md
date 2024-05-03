@@ -27,8 +27,12 @@ npm install hexo-generator-feed --save
 
 ## Theme
 
-For theme, I use [cactus](https://github.com/probberechts/hexo-theme-cactus). It is easy to
+For theme, I use [even](https://github.com/ahonn/hexo-theme-even). It is easy to
 setup if you following the guide.
+
+```sh
+npm install hexo-renderer-ejs hexo-renderer-dartsass --save
+```
 
 ### Mermaid Support
 
@@ -36,20 +40,8 @@ setup if you following the guide.
 npm install hexo-filter-mermaid-diagrams --save
 ```
 
-### Better figure
-
-```sh
-npm install hexo-light-gallery --save
-```
-
 ## SEO
 
 ```sh
 npm install hexo-generator-sitemap --save
-```
-
-## Redirect Url
-
-```sh
-npm install hexo-generator-redirect --save
 ```
