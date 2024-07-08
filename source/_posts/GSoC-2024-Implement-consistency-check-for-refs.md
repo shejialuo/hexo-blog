@@ -21,3 +21,8 @@ You may access all related pages by visiting the [GSoC 2024 category](https://lu
 ## Contents
 
 1. [Community Bonding Period](https://luolibrary.com/2024/05/27/GSoC-Community-Bonding-Period/)
+2. [GSoC Week 1](https://luolibrary.com/2024/06/02/GSoC-Week-1/)
+3. [GSoC Week 2](https://luolibrary.com/2024/06/10/GSoC-Week-2/)
+4. [GSoC Week 3](https://luolibrary.com/2024/06/17/GSoC-Week-3/)
+5. [GSoC Week 4-5](https://luolibrary.com/2024/06/30/GSoC-Week-4-5/)
+6. [GSoC Week 6](https://luolibrary.com/2024/07/08/GSoC-Week-6/)
