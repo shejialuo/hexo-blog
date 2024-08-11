@@ -304,6 +304,10 @@ It's hard to explain this idea, you should carefully read the [blislab](https://
 
 + [Anatomy of High-Performance Matrix Multiplication](https://dl.acm.org/doi/10.1145/1356052.1356053)
 
+I follow the below figure to implement the algorithm.
+
+![Three Cache Level Matrix Multiplication](https://s2.loli.net/2024/08/11/7iTaYZnUWkVv82P.png)
+
 ```c++
 class GemmBlockWithThreeCacheLevel {
 public:
