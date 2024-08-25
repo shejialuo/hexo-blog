@@ -4,7 +4,9 @@ tags:
   - GSoC
 categories:
   - GSoC 2024
+date: 2024-08-25 22:32:06
 ---
+
 
 Suddenly, I recalled myself writing the proposal back then, and I couldn't help but feel a bit wistful. Every time it ends, there's always an unintentional sense of sadness. After three months, my GSoC project has also come to an end.
 
