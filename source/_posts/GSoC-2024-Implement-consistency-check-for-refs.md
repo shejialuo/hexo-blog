@@ -26,3 +26,7 @@ You may access all related pages by visiting the [GSoC 2024 category](https://lu
 4. [GSoC Week 3](https://luolibrary.com/2024/06/17/GSoC-Week-3/)
 5. [GSoC Week 4-5](https://luolibrary.com/2024/06/30/GSoC-Week-4-5/)
 6. [GSoC Week 6](https://luolibrary.com/2024/07/08/GSoC-Week-6/)
+7. [GSoC Week 7](https://luolibrary.com/2024/07/16/GSoC-Week-7/)
+8. [GSoC Week 8-9](https://luolibrary.com/2024/07/28/GSoC-Week-8-9/)
+9. [GSoC Week 10-11](https://luolibrary.com/2024/08/13/GSoC-Week-10-11/)
+10. [GSoC Final Report](https://luolibrary.com/2024/08/25/GSoC-Final-Report/)
