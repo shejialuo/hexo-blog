@@ -53,19 +53,49 @@ VERBOSE=off
 LOGFILE=/tmp/procmaillog
 
 :0
-* ^TO*392499367@qq.com*
-Mail/QQMail/inbox
+* ^TO392499367@qq\.com
+Mail/QQMail/inbox/
 
 :0
-* ^TO*shejialuo@foxmail.com*
-Mail/QQMail/inbox
+* ^TOshejialuo@foxmail\.com
+Mail/QQMail/inbox/
+
+:0
+* ^(To|Cc):.*git@vger\.kernel\.org
+* ^TOshejialuo@gmail\.com
+Mail/GMail/mailing_list/git/
+
+:0
+* ^From:.*@google\.com
+* ^TOshejialuo@gmail\.com
+Mail/GMail/information/google/
+
+:0
+* ^From:.*@apple\.com
+* ^TOshejialuo@gmail\.com
+Mail/GMail/information/apple/
+
+:0
+* ^From:.*@github\.com
+* ^TOshejialuo@gmail\.com
+Mail/GMail/information/github/
+
+:0
+* ^From:.*@wakatime\.com
+* ^TOshejialuo@gmail\.com
+Mail/GMail/information/wakatime/
+
+:0
+* ^From:.*@wakatime\.com
+* ^TOshejialuo@gmail\.com
+Mail/GMail/information/steam/
 
 :0
 * ^TO*shejialuo@gmail.com*
-Mail/GMail/inbox
+Mail/GMail/inbox/
 
 :0：
-Mail/inbox
+Mail/spam
 ```
 
 The configuration described above is straightforward. It efficiently examines both the To and Cc fields of an email and directs the message to the appropriate folder accordingly.
@@ -116,6 +146,9 @@ source ~/.config/mutt/dracula.muttrc
 The configuration could be very different for different people. I simply put my configuration below. You'd better use the `man muttrc` to change the configuration for whatever you like.
 
 ```config
+# Use directory by default instead of a single file
+set mbox_type=Maildir
+
 # The default directory to save attach_save_dirachments from the "attachment" menu.
 set attach_save_dir = ~/.config/mutt/attachments
 
@@ -224,6 +257,41 @@ set record="$HOME/Mail/QQMail/sent"
 set postponed="$HOME/Mail/QQMail/draft"
 
 # vim: ft=muttrc:
+```
+
+## Create Mail Directories
+
+```sh
+# spam
+mkdir -p $HOME/Mail/spam/{cur,new,tmp}
+
+# QQMail
+mkdir -p $HOME/Mail/QQMail/inbox/{cur,new,tmp}
+mkdir -p $HOME/Mail/QQMail/draft/{cur,new,tmp}
+mkdir -p $HOME/Mail/QQMail/seen/{cur,new,tmp}
+mkdir -p $HOME/Mail/QQMail/sent/{cur,new,tmp}
+
+# GMail
+mkdir -p $HOME/Mail/GMail/inbox/{cur,new,tmp}
+mkdir -p $HOME/Mail/GMail/draft/{cur,new,tmp}
+mkdir -p $HOME/Mail/GMail/seen/{cur,new,tmp}
+mkdir -p $HOME/Mail/GMail/sent/{cur,new,tmp}
+mkdir -p $HOME/Mail/GMail/information
+mkdir -p $HOME/Mail/GMail/mailing_list
+```
+
+## Common Operations
+
+### Read Raw Mailbox
+
+```sh
+muut -f /tmp/a
+```
+
+### Send the Patches
+
+```sh
+for p in *.patch; do proxychains4 mutt -H "$p"; done
 ```
 
 ## Reference
